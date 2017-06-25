@@ -1,8 +1,6 @@
 @echo off
 SET builddir=%~dp0
 
-call build-resource.bat
-
 rmdir "%~dp0..\src\Frapid.Web\bin" /Q /S
 xcopy "%~dp0..\src\Frapid.Web\Resources\_Configs\Assets" "%~dp0..\src\Frapid.Web\Resources\Configs\Assets\" /s/y
 
@@ -32,6 +30,11 @@ if exist "../src/Frapid.Web/Areas/Frapid.Calendar/Frapid.Calendar.sln" (
 	"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" /verbosity:quiet /nologo /property:Configuration=Debug ../src/Frapid.Web/Areas/Frapid.Calendar/Frapid.Calendar.sln /p:VisualStudioVersion=14.0
 )
 
+if exist "../src/Frapid.Web/Areas/Frapid.Core/Frapid.Core.sln" (
+	@echo Building Core Module
+	"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" /verbosity:quiet /nologo /property:Configuration=Debug ../src/Frapid.Web/Areas/Frapid.Core/Frapid.Core.sln /p:VisualStudioVersion=14.0
+)
+
 if exist "../src/Frapid.Web/Areas/Frapid.Reports/Frapid.Reports.sln" (
 	@echo Building Frapid Reporting Module
 	"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" /verbosity:quiet /nologo /property:Configuration=Debug ../src/Frapid.Web/Areas/Frapid.Reports/Frapid.Reports.sln /p:VisualStudioVersion=14.0
@@ -53,10 +56,6 @@ if exist "../src/Frapid.Web/Areas/Frapid.Config/Frapid.Config.sln" (
 	"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" /verbosity:quiet /nologo /property:Configuration=Debug ../src/Frapid.Web/Areas/Frapid.Config/Frapid.Config.sln /p:VisualStudioVersion=14.0
 )
 
-if exist "../src/Frapid.Web/Areas/Frapid.Core/Frapid.Core.sln" (
-	@echo Building Core Module
-	"%programfiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" /verbosity:quiet /nologo /property:Configuration=Debug ../src/Frapid.Web/Areas/Frapid.Core/Frapid.Core.sln /p:VisualStudioVersion=14.0
-)
 
 if exist "../src/Frapid.Web/Areas/Frapid.Account/Frapid.Account.sln" (
 	@echo Building Account Module
